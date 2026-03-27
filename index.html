@@ -64,14 +64,14 @@
       const loadData = async () => {
         try {
           setLoading(true);
-          const teamsResult = await window.storage.get('teams', true);
-          const matchesResult = await window.storage.get('matches', true);
+          const teamsData = localstorage.getItem('teams');
+          const matchesData = localstorage.getItem('matches');
           
-          if (teamsResult?.value) {
-            setTeams(JSON.parse(teamsResult.value));
+          if (teamsData) {
+            setTeams(JSON.parse(teamsData));
           }
-          if (matchesResult?.value) {
-            setMatches(JSON.parse(matchesResult.value));
+          if (matchesData) {
+            setMatches(JSON.parse(matchesData));
           }
         } catch (error) {
           console.log('Primera carga de datos');
@@ -80,18 +80,18 @@
         }
       };
 
-      const saveTeams = async (newTeams) => {
+      const saveTeams =  (newTeams) => {
         try {
-          await window.storage.set('teams', JSON.stringify(newTeams), true);
+          localstorage.set('teams', JSON.stringify(newTeams), true);
           setTeams(newTeams);
         } catch (error) {
           alert('Error al guardar equipos');
         }
       };
 
-      const saveMatches = async (newMatches) => {
+      const saveMatches =  (newMatches) => {
         try {
-          await window.storage.set('matches', JSON.stringify(newMatches), true);
+          localstorage.set('matches', JSON.stringify(newMatches), true);
           setMatches(newMatches);
         } catch (error) {
           alert('Error al guardar partidos');
