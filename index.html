@@ -33,6 +33,13 @@
     }
   </style>
 </head>
+
+  <script>
+  window.addEventListener('error', function(e) {
+    console.error('Error global:', e.error);
+  });
+  </script>
+  
 <body>
   <div id="root"></div>
   
@@ -43,7 +50,15 @@
 
   <script type="text/babel">
     const { useState, useEffect } = React;
-    const { Trophy, Calendar, Users, Settings, ChevronRight, Plus, X, Edit2, Save } = lucide;
+    const { icons } = lucide;
+    const Trophy = icons.trophy;
+    const Calendar = icons.calendar;
+    const Users = icons.users;
+    const Settings = icons.settings;
+    const Plus = icons.plus;
+    const X = icons.x;
+    const Edit2 = icons.edit2;
+    const Save = icons.save;
 
     function FutbolApp() {
       const [activeTab, setActiveTab] = useState('partidos');
@@ -1145,8 +1160,13 @@
       );
     }
 
-    const root = ReactDOM.createRoot(document.getElementById('root'));
-    root.render(<FutbolApp />);
+try {
+  const root = ReactDOM.createRoot(document.getElementById('root'));
+  root.render(<FutbolApp />);
+} catch (e) {
+  document.body.innerHTML = '<h1 style="color:white;background:black;padding:20px">Error cargando app. Abre consola (F12)</h1>';
+  console.error(e);
+}
   </script>
 </body>
 </html>
